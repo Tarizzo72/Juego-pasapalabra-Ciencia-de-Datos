@@ -3,6 +3,7 @@ import pandas as pd
 import random
 import unicodedata
 import re
+import time
 
 # --------------------------
 # CONFIGURACIÓN INICIAL
@@ -19,7 +20,7 @@ def normalizar(texto):
     texto = texto.lower().strip()
     texto = unicodedata.normalize('NFD', texto)
     texto = texto.encode('ascii', 'ignore').decode("utf-8")
-    texto = re.sub(r'[^a-z0-9]', '', texto)  # elimina tildes, guiones, etc.
+    texto = re.sub(r'[^a-z0-9]', '', texto)
     return texto
 
 # Carga preguntas y selecciona una por letra
@@ -51,8 +52,28 @@ if "preguntas" not in st.session_state:
     for p in st.session_state.preguntas:
         st.session_state.estados[p["letra"]] = "pendiente"
 
-preguntas = st.session_state.preguntas
-indice = st.session_state.indice
+if "inicio" not in st.session_state:
+    st.session_state.inicio = time.time()
+
+if "tiempo_restante" not in st.session_state:
+    st.session_state.tiempo_restante = 150  # segundos
+
+# --------------------------
+# TEMPORIZADOR
+# --------------------------
+tiempo_transcurrido = time.time() - st.session_state.inicio
+st.session_state.tiempo_restante = int(150 - tiempo_transcurrido)
+
+if st.session_state.tiempo_restante > 0:
+    st.markdown(f"⏱️ Tiempo restante: **{st.session_state.tiempo_restante}** segundos")
+else:
+    st.warning("⏰ ¡Se acabó el tiempo!")
+    st.success("🎉 Juego terminado por tiempo")
+    st.write(f"Puntaje final: **{st.session_state.puntaje} / {len(st.session_state.preguntas)}**")
+    if st.button("Jugar otra vez"):
+        st.session_state.clear()
+        st.rerun()
+    st.stop()
 
 # --------------------------
 # ROSCO VISUAL
@@ -78,8 +99,11 @@ for i, letra in enumerate(letras):
     )
 
 # --------------------------
-# JUEGO ACTUAL
+# PREGUNTA ACTUAL
 # --------------------------
+preguntas = st.session_state.preguntas
+indice = st.session_state.indice
+
 if indice < len(preguntas):
     actual = preguntas[indice]
     letra = actual["letra"]
@@ -109,7 +133,7 @@ if indice < len(preguntas):
     with col2:
         if st.button("Pasapalabra"):
             st.session_state.estados[letra] = "pasapalabra"
-            st.session_state.preguntas.append(actual)  # lo manda al final
+            st.session_state.preguntas.append(actual)
             st.session_state.indice += 1
             st.rerun()
 else:
@@ -117,4 +141,4 @@ else:
     st.write(f"Puntaje final: **{st.session_state.puntaje} / {len(preguntas)}**")
     if st.button("Jugar otra vez"):
         st.session_state.clear()
-        st.rerun()      
+        st.rerun()

@@ -70,8 +70,12 @@ if restante > 0:
         f"<h2 style='color:darkblue;'>⏱️ Tiempo restante: {restante} segundos</h2>",
         unsafe_allow_html=True
     )
-    time.sleep(1)
-    st.rerun()
+
+    # Solo actualiza el reloj si aún no hay respuesta ingresada
+    if "respuesta_" + str(st.session_state.indice) not in st.session_state:
+        time.sleep(1)
+        st.rerun()
+
 else:
     st.warning("⏰ ¡Se acabó el tiempo!")
     st.success("🎉 Juego terminado por tiempo")

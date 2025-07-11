@@ -15,7 +15,6 @@ st.title("🎮 Pasapalabra - Ciencia de Datos")
 # FUNCIONES DE SOPORTE
 # --------------------------
 
-# Normaliza texto para comparación flexible
 def normalizar(texto):
     texto = texto.lower().strip()
     texto = unicodedata.normalize('NFD', texto)
@@ -23,7 +22,6 @@ def normalizar(texto):
     texto = re.sub(r'[^a-z0-9]', '', texto)
     return texto
 
-# Carga preguntas y selecciona una por letra
 @st.cache_data
 def cargar_preguntas():
     df = pd.read_csv("data/preguntas_pasapalabra_final.csv")
@@ -56,20 +54,32 @@ if "inicio" not in st.session_state:
     st.session_state.inicio = time.time()
 
 if "tiempo_restante" not in st.session_state:
-    st.session_state.tiempo_restante = 150  # segundos
+    st.session_state.tiempo_restante = 300  # segundos
+
+if "resumen" not in st.session_state:
+    st.session_state.resumen = []
 
 # --------------------------
 # TEMPORIZADOR
 # --------------------------
 tiempo_transcurrido = time.time() - st.session_state.inicio
-st.session_state.tiempo_restante = int(150 - tiempo_transcurrido)
+st.session_state.tiempo_restante = int(300 - tiempo_transcurrido)
 
 if st.session_state.tiempo_restante > 0:
-    st.markdown(f"⏱️ Tiempo restante: **{st.session_state.tiempo_restante}** segundos")
+    st.markdown(
+        f"<h2 style='color:darkblue;'>⏱️ Tiempo restante: {st.session_state.tiempo_restante} segundos</h2>",
+        unsafe_allow_html=True
+    )
 else:
     st.warning("⏰ ¡Se acabó el tiempo!")
     st.success("🎉 Juego terminado por tiempo")
     st.write(f"Puntaje final: **{st.session_state.puntaje} / {len(st.session_state.preguntas)}**")
+
+    st.markdown("### 📋 Resumen de la partida")
+    df_resumen = pd.DataFrame(st.session_state.resumen)
+    df_resumen = df_resumen[["letra", "definicion", "tu_respuesta", "respuesta_correcta", "estado"]]
+    st.dataframe(df_resumen)
+
     if st.button("Jugar otra vez"):
         st.session_state.clear()
         st.rerun()
@@ -120,25 +130,50 @@ if indice < len(preguntas):
 
     with col1:
         if st.button("Responder"):
-            if normalizar(respuesta) == normalizar(respuesta_correcta):
+            es_correcto = normalizar(respuesta) == normalizar(respuesta_correcta)
+            estado = "correcto" if es_correcto else "incorrecto"
+
+            st.session_state.resumen.append({
+                "letra": letra,
+                "definicion": definicion,
+                "respuesta_correcta": respuesta_correcta,
+                "tu_respuesta": respuesta.strip(),
+                "estado": estado
+            })
+
+            if es_correcto:
                 st.success("✅ ¡Correcto!")
                 st.session_state.puntaje += 1
                 st.session_state.estados[letra] = "correcto"
             else:
                 st.error(f"❌ Incorrecto. La respuesta era: {respuesta_correcta}")
                 st.session_state.estados[letra] = "incorrecto"
+
             st.session_state.indice += 1
             st.rerun()
 
     with col2:
         if st.button("Pasapalabra"):
             st.session_state.estados[letra] = "pasapalabra"
+            st.session_state.resumen.append({
+                "letra": letra,
+                "definicion": definicion,
+                "respuesta_correcta": respuesta_correcta,
+                "tu_respuesta": "(pasapalabra)",
+                "estado": "pasapalabra"
+            })
             st.session_state.preguntas.append(actual)
             st.session_state.indice += 1
             st.rerun()
 else:
     st.success("🎉 ¡Juego terminado!")
     st.write(f"Puntaje final: **{st.session_state.puntaje} / {len(preguntas)}**")
+
+    st.markdown("### 📋 Resumen de la partida")
+    df_resumen = pd.DataFrame(st.session_state.resumen)
+    df_resumen = df_resumen[["letra", "definicion", "tu_respuesta", "respuesta_correcta", "estado"]]
+    st.dataframe(df_resumen)
+
     if st.button("Jugar otra vez"):
         st.session_state.clear()
         st.rerun()

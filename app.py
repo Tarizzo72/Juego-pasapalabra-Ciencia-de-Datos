@@ -49,34 +49,24 @@ if "preguntas" not in st.session_state:
     st.session_state.estados = {}
     for p in st.session_state.preguntas:
         st.session_state.estados[p["letra"]] = "pendiente"
-
-if "inicio" not in st.session_state:
     st.session_state.inicio = time.time()
-
-if "resumen" not in st.session_state:
     st.session_state.resumen = []
+    st.session_state.temporizador_activo = True
 
 # --------------------------
-# TEMPORIZADOR (ACTUALIZACIÓN EN TIEMPO REAL)
+# TEMPORIZADOR
 # --------------------------
 TIEMPO_LIMITE = 300  # 5 minutos
-
 tiempo_transcurrido = time.time() - st.session_state.inicio
 restante = int(TIEMPO_LIMITE - tiempo_transcurrido)
 st.session_state.tiempo_restante = restante
 
-if restante > 0:
-    st.markdown(
-        f"<h2 style='color:darkblue;'>⏱️ Tiempo restante: {restante} segundos</h2>",
-        unsafe_allow_html=True
-    )
+st.markdown(
+    f"<h2 style='color:darkblue;'>⏱️ Tiempo restante: {restante} segundos</h2>",
+    unsafe_allow_html=True
+)
 
-    # Solo actualiza el reloj si aún no hay respuesta ingresada
-    if "respuesta_" + str(st.session_state.indice) not in st.session_state:
-        time.sleep(1)
-        st.rerun()
-
-else:
+if restante <= 0:
     st.warning("⏰ ¡Se acabó el tiempo!")
     st.success("🎉 Juego terminado por tiempo")
     st.write(f"Puntaje final: **{st.session_state.puntaje} / {len(st.session_state.preguntas)}**")
@@ -90,6 +80,11 @@ else:
         st.session_state.clear()
         st.rerun()
     st.stop()
+
+# 🔁 Solo actualizar automáticamente si aún no hay respuesta escrita
+if st.session_state.temporizador_activo:
+    time.sleep(1)
+    st.rerun()
 
 # --------------------------
 # ROSCO VISUAL
@@ -121,6 +116,8 @@ preguntas = st.session_state.preguntas
 indice = st.session_state.indice
 
 if indice < len(preguntas):
+    st.session_state.temporizador_activo = False  # ❗ Detenemos rerun automático
+
     actual = preguntas[indice]
     letra = actual["letra"]
     tipo = actual["tipo"]
@@ -156,6 +153,7 @@ if indice < len(preguntas):
                 st.session_state.estados[letra] = "incorrecto"
 
             st.session_state.indice += 1
+            st.session_state.temporizador_activo = True
             st.rerun()
 
     with col2:
@@ -170,6 +168,7 @@ if indice < len(preguntas):
             })
             st.session_state.preguntas.append(actual)
             st.session_state.indice += 1
+            st.session_state.temporizador_activo = True
             st.rerun()
 else:
     st.success("🎉 ¡Juego terminado!")

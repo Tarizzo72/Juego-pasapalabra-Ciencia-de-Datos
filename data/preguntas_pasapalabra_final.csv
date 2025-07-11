@@ -1,0 +1,79 @@
+letra,concepto,definicion,tema,tipo_letra
+A,Algoritmo,Conjunto de instrucciones ordenadas para resolver un problema.,Programación,empieza
+A,Aprendizaje,Proceso por el cual un modelo mejora su desempeño con los datos.,Machine Learning,empieza
+A,Análisis,Proceso de examinar datos para extraer información útil.,Estadística,empieza
+B,Bayes,Teorema que permite actualizar probabilidades con nueva evidencia.,Estadística,empieza
+B,Bootstrap,Método de remuestreo con reemplazo para estimar precisión de modelos.,Estadística,empieza
+B,Bias,Error sistemático que impide que un modelo generalice correctamente.,Machine Learning,empieza
+C,Clustering,Técnica no supervisada para agrupar datos similares.,Machine Learning,empieza
+C,Cross-validation,Técnica de validación para evaluar modelos dividiendo los datos en subconjuntos.,Evaluación de modelos,empieza
+C,Correlación,Medida que indica la relación lineal entre dos variables.,Estadística,empieza
+D,Dataset,Colección estructurada de datos utilizada para entrenar modelos.,Datos,empieza
+D,Distribución,Forma en que se dispersan los valores de una variable.,Estadística,empieza
+D,Dimensión,Cantidad de variables o características en un conjunto de datos.,Preprocesamiento,empieza
+E,Error,Diferencia entre el valor predicho y el valor real.,Evaluación de modelos,empieza
+E,Entrenamiento,Proceso en el que un modelo aprende a partir de datos.,Machine Learning,empieza
+E,Exploración,Análisis inicial de los datos para conocer su estructura y patrones.,Análisis de datos,empieza
+F,Feature,Variable o atributo de entrada en un modelo de aprendizaje.,Machine Learning,empieza
+F,Frecuencia,Número de veces que se repite un valor en un conjunto de datos.,Estadística,empieza
+F,Función de pérdida,Métrica usada para evaluar el error del modelo durante el entrenamiento.,Evaluación de modelos,empieza
+G,Gradient,Vector que indica la dirección de mayor cambio en una función.,Optimización,empieza
+G,Generalización,Capacidad de un modelo de adaptarse a datos no vistos.,Machine Learning,empieza
+G,Gráfico,Representación visual de datos.,Visualización,empieza
+H,Hipótesis,Proposición que se prueba estadísticamente con datos.,Estadística,empieza
+H,Histogramas,Gráficos de barras que representan distribuciones de frecuencias.,Visualización,empieza
+H,Hiperparámetros,Parámetros que configuran el comportamiento de un modelo.,Machine Learning,empieza
+I,Inferencia,Proceso de extraer conclusiones a partir de datos y modelos.,Estadística,empieza
+I,Imputación,Método para reemplazar valores faltantes en un dataset.,Preprocesamiento,empieza
+I,Independencia,Condición en la que el valor de una variable no depende de otra.,Estadística,empieza
+J,Jackknife,Técnica de remuestreo usada para estimar errores estándar.,Estadística,empieza
+J,Jittering,Técnica para añadir ruido visual a gráficos y evitar superposición.,Visualización,empieza
+K,K-means,Algoritmo de agrupamiento que particiona datos en K grupos.,Machine Learning,empieza
+K,K-fold,Método de validación cruzada con K particiones.,Evaluación de modelos,empieza
+L,Lineal,Tipo de modelo cuya salida es combinación lineal de las entradas.,Modelado,empieza
+L,Logística,Regresión usada para predecir probabilidades binarias.,Modelado,empieza
+L,Learning rate,Parámetro que controla la velocidad de aprendizaje de un modelo.,Optimización,empieza
+M,Modelo,Representación matemática usada para hacer predicciones.,Modelado,empieza
+M,Media,Promedio aritmético de un conjunto de valores.,Estadística,empieza
+M,Mediana,Valor central en un conjunto ordenado.,Estadística,empieza
+N,Normalización,Escalado de variables para mejorar el rendimiento de modelos.,Preprocesamiento,empieza
+N,Normal,Distribución simétrica y con forma de campana.,Estadística,empieza
+N,Naive Bayes,Clasificador probabilístico basado en la independencia de atributos.,Machine Learning,empieza
+O,Overfitting,Cuando un modelo se ajusta demasiado a los datos de entrenamiento.,Evaluación de modelos,empieza
+O,Outlier,Valor extremo que difiere significativamente del resto.,Preprocesamiento,empieza
+O,Optimización,Proceso para mejorar el rendimiento de un modelo.,Optimización,empieza
+P,Precisión,Proporción de verdaderos positivos entre todas las predicciones positivas.,Evaluación de modelos,empieza
+P,P-valor,Probabilidad de obtener un resultado igual o más extremo que el observado.,Estadística,empieza
+P,Predicción,Estimación de un resultado basada en un modelo entrenado.,Modelado,empieza
+Q,Q-Q plot,Gráfico que compara dos distribuciones para ver si son similares.,Visualización,empieza
+Q,Quantile,Valor por debajo del cual se encuentra una proporción de los datos.,Estadística,empieza
+R,Regresión,Modelo usado para predecir variables continuas.,Modelado,empieza
+R,R-cuadrado,Métrica que evalúa la proporción de varianza explicada por un modelo.,Evaluación de modelos,empieza
+S,Sobreajuste,Traducción común de overfitting: ajuste excesivo al set de entrenamiento.,Modelado,empieza
+S,Simulación,Imitación computacional de procesos reales para analizar resultados.,Ciencia de datos,empieza
+S,Sampling,Proceso de selección de una muestra representativa de los datos.,Estadística,empieza
+T,Test,Conjunto de datos usado para evaluar el rendimiento de un modelo.,Evaluación de modelos,empieza
+T,Transformación,Cambio aplicado a los datos para adecuarlos al análisis.,Preprocesamiento,empieza
+T,Tasa de error,Proporción de predicciones incorrectas de un modelo.,Evaluación de modelos,empieza
+U,Umbral,Valor de corte usado para clasificar observaciones.,Evaluación de modelos,empieza
+U,Underfitting,Modelo que no captura bien la relación en los datos.,Modelado,empieza
+V,Validación,Proceso de evaluación del rendimiento del modelo.,Evaluación de modelos,empieza
+V,Variable,Cualquier característica que puede ser medida o categorizada.,Estadística,empieza
+V,Varianza,Medida de dispersión respecto a la media.,Estadística,empieza
+X,Explicabilidad,Capacidad de un modelo para ser entendido por humanos.,Interpretabilidad,contiene
+X,Explicación,Justificación de por qué un modelo produce ciertos resultados.,Interpretabilidad,contiene
+A,AUC,"Área bajo la curva ROC, usada para evaluar clasificadores.",Evaluación de modelos,empieza
+A,Análisis exploratorio,Proceso inicial para entender la estructura de un conjunto de datos.,Análisis de datos,empieza
+B,Big Data,Grandes volúmenes de datos que requieren nuevas tecnologías para ser procesados.,Datos,empieza
+B,Bagging,Técnica de ensamblado que combina modelos entrenados con distintas muestras.,Machine Learning,empieza
+C,Coeficiente,Peso numérico asignado a una variable en un modelo.,Modelado,empieza
+C,Curva ROC,Gráfico que evalúa la capacidad discriminativa de un modelo binario.,Evaluación de modelos,empieza
+D,Descenso por gradiente,Algoritmo usado para minimizar funciones en entrenamiento de modelos.,Optimización,empieza
+D,Dendrograma,Representación gráfica de una jerarquía de agrupamientos.,Machine Learning,empieza
+E,Estadística,Ciencia que analiza y describe conjuntos de datos.,Estadística,empieza
+E,Evaluación,Proceso de medir el rendimiento de un modelo.,Evaluación de modelos,empieza
+Z,Z-score,Valor que indica cuántas desviaciones estándar se aleja un dato de la media.,Estadística,empieza
+Z,Zona de decisión,Área donde se acepta o rechaza una hipótesis estadística.,Estadística,empieza
+Z,Z-test,Prueba estadística para comparar medias cuando se conoce la varianza.,Estadística,empieza
+Z,Zero-inflated model,"Modelo para datos con excesivos ceros, común en conteos.",Modelado,empieza
+Z,Z-normalización,Proceso de estandarización de datos con media 0 y varianza 1.,Preprocesamiento,empieza

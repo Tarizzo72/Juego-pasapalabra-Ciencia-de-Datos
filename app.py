@@ -53,23 +53,25 @@ if "preguntas" not in st.session_state:
 if "inicio" not in st.session_state:
     st.session_state.inicio = time.time()
 
-if "tiempo_restante" not in st.session_state:
-    st.session_state.tiempo_restante = 300  # segundos
-
 if "resumen" not in st.session_state:
     st.session_state.resumen = []
 
 # --------------------------
-# TEMPORIZADOR
+# TEMPORIZADOR (ACTUALIZACIÓN EN TIEMPO REAL)
 # --------------------------
-tiempo_transcurrido = time.time() - st.session_state.inicio
-st.session_state.tiempo_restante = int(300 - tiempo_transcurrido)
+TIEMPO_LIMITE = 300  # 5 minutos
 
-if st.session_state.tiempo_restante > 0:
+tiempo_transcurrido = time.time() - st.session_state.inicio
+restante = int(TIEMPO_LIMITE - tiempo_transcurrido)
+st.session_state.tiempo_restante = restante
+
+if restante > 0:
     st.markdown(
-        f"<h2 style='color:darkblue;'>⏱️ Tiempo restante: {st.session_state.tiempo_restante} segundos</h2>",
+        f"<h2 style='color:darkblue;'>⏱️ Tiempo restante: {restante} segundos</h2>",
         unsafe_allow_html=True
     )
+    time.sleep(1)
+    st.rerun()
 else:
     st.warning("⏰ ¡Se acabó el tiempo!")
     st.success("🎉 Juego terminado por tiempo")

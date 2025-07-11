@@ -40,7 +40,7 @@ def cargar_preguntas():
 
 # --------------------------
 # ESTADO DE SESIÓN
-# --------------------------
+# 
 if "preguntas" not in st.session_state:
     st.session_state.preguntas = cargar_preguntas()
     st.session_state.indice = 0
